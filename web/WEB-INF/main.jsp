@@ -79,7 +79,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">部门管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">部门列表</a></dd>
+                        <dd><a href="PartServlet?method=ToPartList" target="contextPage">部门列表</a></dd>
                         <dd><a href="javascript:;">新增部门</a></dd>
                     </dl>
                 </li>

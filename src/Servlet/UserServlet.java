@@ -76,12 +76,16 @@ public class UserServlet extends BaseServlet{
         request.getRequestDispatcher("/WEB-INF/main.jsp").forward(request, response);
     }
     public void ToStaffList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        GetStaffData(request,response);
         request.getRequestDispatcher("/WEB-INF/StaffList.jsp").forward(request, response);
     }
-    public List GetStaffData(HttpServletRequest request, HttpServletResponse response){
+    public void GetStaffData(HttpServletRequest request, HttpServletResponse response){
         String sql = "select * from user";
         List<User> list = DBHelper.queryAll(sql, User.class, null);
-        return list;
+//        for (User user : list) {
+//            System.out.println(user.getPart()+" "+user.getUserName());
+//        }
+        request.setAttribute("user",list);
     }
 //    public void ToPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        String target = (String) request.getSession().getAttribute("target");

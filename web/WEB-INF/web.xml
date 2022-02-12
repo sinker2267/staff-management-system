@@ -14,5 +14,13 @@
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>PartServlet</servlet-name>
+        <servlet-class>Servlet.PartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PartServlet</servlet-name>
+        <url-pattern>/PartServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

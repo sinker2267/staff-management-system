@@ -5,14 +5,16 @@ public class User {
     private String userName;
     private String userMoblie;
     private String userPsd;
+    private String userPart;
 
     public User(){}
 
-    public User(int id, String userName, String userMoblie, String userPsd) {
+    public User(int id, String userName, String userMoblie, String userPsd, String part) {
         this.id = id;
         this.userName = userName;
         this.userMoblie = userMoblie;
         this.userPsd = userPsd;
+        this.userPart = part;
     }
 
     public int getId() {
@@ -45,5 +47,13 @@ public class User {
 
     public void setUserPsd(String userPsd) {
         this.userPsd = userPsd;
+    }
+
+    public String getPart() {
+        return userPart;
+    }
+
+    public void setPart(String part) {
+        this.userPart = part;
     }
 }
