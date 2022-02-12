@@ -129,7 +129,6 @@
             type: "POST",
             data: {"moblie":mobile,"psd":psd},
             success:function (str){
-                console.info("2");
                 if(str == 1){
                     alert("登录成功");
                     window.location.href = "UserServlet?method=ToMain";
@@ -143,33 +142,6 @@
             }
         })
     }
-    // $("#btnSubmit").click(function (){
-    //     var mobile = $("#mobile").val();
-    //     var psd = $("#psd").val();
-    //     if(mobile == null || psd == null){
-    //         return;
-    //     }
-    //     console.info(mobile+" "+psd);
-    //     $.ajax({
-    //         url: "UserServlet?method=loginCheck",
-    //         type: "POST",
-    //         data: {"moblie":mobile,"psd":psd},
-    //         success:function (str){
-    //             console.info("2");
-    //             if(str == 1){
-    //                 alert("登录成功");
-    //                 window.location.href = "UserServlet?method=ToMain";
-    //             }
-    //             else{
-    //                 alert("登录失败，请重新登录");
-    //             }
-    //         },
-    //         error:function (){
-    //
-    //         }
-    //     })
-    // })
-
 </script>
 
 <script>

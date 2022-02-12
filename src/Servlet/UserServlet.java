@@ -40,10 +40,36 @@ public class UserServlet extends BaseServlet{
             HttpSession session = request.getSession();
             session.setAttribute("moblie",moblie);
             session.setAttribute("psd",psd);
+            session.setAttribute("name",list.get(0).getUserName());
             responseObject(1, response);
         }
         else{
             responseObject(0, response);
+        }
+    }
+    public void registerCheck(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String name = request.getParameter("name");
+        String moblie = request.getParameter("moblie");
+        String psd = MD5Util.encode(request.getParameter("psd"));
+        String sql = "select * from user where user_name = ? and user_moblie = ?";
+        List<User> list = DBHelper.queryAll(sql, User.class, name, moblie);
+        if(list.size() != 0){
+            responseObject(0, response);
+            return;
+        }
+        else {
+            String inserSql = "insert into user (user_name, user_moblie, user_psd)values(?,?,?)";
+            int row = DBHelper.deal(inserSql, name, moblie, psd);
+            if(row == 1){
+                HttpSession session = request.getSession();
+                session.setAttribute("moblie",moblie);
+                session.setAttribute("psd",psd);
+                session.setAttribute("name",name);
+                responseObject(1, response);
+            }
+            else{
+                responseObject(0, response);
+            }
         }
     }
     public void ToMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

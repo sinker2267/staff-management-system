@@ -27,7 +27,7 @@
         <a id="switch_login" class="switch_btn">登陆</a>
         <div class="switch_bottom" id="switch_bottom"></div>
     </nav>
-    <form method="post" action="Servlet/UserRegister">
+    <form onsubmit="return false">
         <ul class="group_input">
             <li style="margin-left: 13px">
                 <input type="text" placeholder="姓名" class="name required" id="name" name="name"/>
@@ -40,7 +40,7 @@
             </li>
         </ul>
 <%--        <button type="submit" class="submit_btn" id="btnSubmit" onclick="sendSubmit()">注册</button>--%>
-        <button type="submit" class="submit_btn" id="btnSubmit">注册</button>
+        <button type="submit" class="submit_btn" id="btnSubmit" onclick="register_btn()">注册</button>
 
         <span class="agreement-tip">点击「注册」按钮，即代表你同意<a href="javascript:;">《协议》</a></span>
     </form>
@@ -51,6 +51,10 @@
 <script src="${pageContext.request.contextPath}/static/assets/libs/particles/js/app.js"></script>
 <!-- <script src="${pageContext.request.contextPath}/static/assets/libs/particles/js/lib/stats.js"></script> -->
 <script>
+    var form = document.getElementsByTagName('form')[0];
+    form.addEventListener('submit',function(e){
+        e.preventDefault();
+    });
     var count_particles, stats, update;
     stats = new Stats;
     stats.setMode(0);
@@ -69,27 +73,9 @@
     };
     requestAnimationFrame(update);
 </script>
-<script>
-    $(".download_btn").click(function(){
-        if($(".QRcode").css("display")=="none"){
-            $(".QRcode").show();
-            $(".download_btn").text("关闭二维码");
-        }else{
-            $(".QRcode").hide();
-            $(".download_btn").text("下载知乎App");
-        }
-    });
-</script>
+
 <script>
     $(function(){
-        //为表单的必填文本框添加提示信息（选择form中的所有后代input元素）
-        // $("form :input.required").each(function () {
-        //     //通过jquery api：$("HTML字符串") 创建jquery对象
-        //     var $required = $("<strong class='high'>*</strong>");
-        //     //添加到this对象的父级对象下
-        //     $(this).parent().append($required);
-        // });
-        // var errorMsg = $(".error-msg").text();
         //为表单元素添加失去焦点事件
         $("form :input").blur(function(){
             var $parent = $(this).parent();
@@ -146,10 +132,36 @@
             if(numError){
                 return false;
             }
-            alert('注册成功！')
-
         });
     })
+    function register_btn(){
+        var name = $("#name").val();
+        var mobile = $("#mobile").val();
+        var psd = $("#psd").val();
+
+        console.info(mobile+" " + psd);
+        if(name =='' || mobile == '' ||  psd == ''){
+            return;
+        }
+        console.info(mobile+" "+psd);
+        $.ajax({
+            url: "UserServlet?method=registerCheck",
+            type: "POST",
+            data: {"name":name,"moblie":mobile,"psd":psd},
+            success:function (str){
+                if(str == 1){
+                    alert("注册成功");
+                    window.location.href = "UserServlet?method=ToMain";
+                }
+                else{
+                    alert("已存在相同用户");
+                }
+            },
+            error:function (){
+                alert("请求失败");
+            }
+        })
+    }
 
 </script>
 <script>
