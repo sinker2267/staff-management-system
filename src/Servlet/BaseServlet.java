@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -28,4 +29,18 @@ public class BaseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
     }
+
+    public void responseObject(Object obj,HttpServletResponse res) throws IOException {
+
+        // 设置响应编码
+        res.setCharacterEncoding("utf-8");
+        PrintWriter out=null;
+        out=res.getWriter();
+        out.write(obj.toString());
+        out.flush();
+        if(out!=null) {
+            out.close();
+        }
+    }
+
 }

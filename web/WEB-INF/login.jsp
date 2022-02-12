@@ -29,7 +29,7 @@
         <div class="switch_bottom" id="switch_bottom"></div>
     </nav>
     <div id="login">
-        <form method="post" action="Servlet/UserLogin" style="margin-left: 20px">
+        <form style="margin-left: 20px" onsubmit="return false">
             <ul class="group_input">
                 <li style="margin-left: 3px">
                     <input type="text" class="mobile required" id="mobile" name="mobile" placeholder="手机号或邮箱" />
@@ -38,7 +38,7 @@
                     <input type="password" class="psd required" id="psd" name="psd" placeholder="密码" />
                 </li>
             </ul>
-            <button type="submit" class="submit_btn" id="btnSubmit">登陆</button>
+            <button type="submit" class="submit_btn" id="btnSubmit" onclick="login_btn()">登陆</button>
         </form>
     </div>
 </div>
@@ -47,6 +47,10 @@
 <script src="${pageContext.request.contextPath}/static/assets/libs/particles/js/app.js"></script>
 <!-- <script src="${pageContext.request.contextPath}/static/assets/libs/particles/js/lib/stats.js"></script> -->
 <script>
+    var form = document.getElementsByTagName('form')[0];
+    form.addEventListener('submit',function(e){
+        e.preventDefault();
+    });
     var count_particles, stats, update;
     stats = new Stats;
     stats.setMode(0);
@@ -64,17 +68,6 @@
         requestAnimationFrame(update);
     };
     requestAnimationFrame(update);
-</script>
-<script>
-    $(".download_btn").click(function(){
-        if($(".QRcode").css("display")=="none"){
-            $(".QRcode").show();
-            $(".download_btn").text("关闭二维码");
-        }else{
-            $(".QRcode").hide();
-            $(".download_btn").text("下载知乎App");
-        }
-    });
 </script>
 <script>
     $(function(){
@@ -121,16 +114,64 @@
         }).focus(function(){
             $(this).triggerHandler("blur");
         });
-
-        //点击重置按钮时，通过trigger()来触发文本框的失去焦点事件
-        // $("#btnSubmit").click(function(){
-        //     $.ajax({
-        //         url: "UserServlet?method=ToRegister"
-        //     })
-        // });
     })
+    function login_btn(){
+        var mobile = $("#mobile").val();
+        var psd = $("#psd").val();
+
+        console.info(mobile+" " + psd);
+        if(mobile == '' ||  psd == ''){
+            return;
+        }
+        console.info(mobile+" "+psd);
+        $.ajax({
+            url: "UserServlet?method=loginCheck",
+            type: "POST",
+            data: {"moblie":mobile,"psd":psd},
+            success:function (str){
+                console.info("2");
+                if(str == 1){
+                    alert("登录成功");
+                    window.location.href = "UserServlet?method=ToMain";
+                }
+                else{
+                    alert("登录失败，请重新登录");
+                }
+            },
+            error:function (){
+                alert("请求失败");
+            }
+        })
+    }
+    // $("#btnSubmit").click(function (){
+    //     var mobile = $("#mobile").val();
+    //     var psd = $("#psd").val();
+    //     if(mobile == null || psd == null){
+    //         return;
+    //     }
+    //     console.info(mobile+" "+psd);
+    //     $.ajax({
+    //         url: "UserServlet?method=loginCheck",
+    //         type: "POST",
+    //         data: {"moblie":mobile,"psd":psd},
+    //         success:function (str){
+    //             console.info("2");
+    //             if(str == 1){
+    //                 alert("登录成功");
+    //                 window.location.href = "UserServlet?method=ToMain";
+    //             }
+    //             else{
+    //                 alert("登录失败，请重新登录");
+    //             }
+    //         },
+    //         error:function (){
+    //
+    //         }
+    //     })
+    // })
 
 </script>
+
 <script>
     $("#switch_signup").click(function (){
         window.location.href = "UserServlet?method=ToRegister";
