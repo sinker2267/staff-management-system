@@ -151,6 +151,10 @@
             success:function (str){
                 if(str == 1){
                     alert("注册成功");
+<%--                    <%--%>
+<%--                      String target = "/WEB-INF/main.jsp";--%>
+<%--                      session.setAttribute("target",target);--%>
+<%--                      %>--%>
                     window.location.href = "UserServlet?method=ToMain";
                 }
                 else{

@@ -73,8 +73,18 @@ public class UserServlet extends BaseServlet{
         }
     }
     public void ToMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //response.sendRedirect("/WEB-INF/main.jsp");
         request.getRequestDispatcher("/WEB-INF/main.jsp").forward(request, response);
     }
-
+    public void ToStaffList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/StaffList.jsp").forward(request, response);
+    }
+    public List GetStaffData(HttpServletRequest request, HttpServletResponse response){
+        String sql = "select * from user";
+        List<User> list = DBHelper.queryAll(sql, User.class, null);
+        return list;
+    }
+//    public void ToPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        String target = (String) request.getSession().getAttribute("target");
+//        request.getRequestDispatcher(target).forward(request, response);
+//    }
 }

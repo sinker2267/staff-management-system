@@ -23,7 +23,7 @@
 <body>
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo layui-hide-xs layui-bg-black">sinker</div>
+        <div class="layui-logo layui-hide-xs layui-bg-black"><% out.print(session.getAttribute("name")); %></div>
         <!-- 头部区域（可配合layui 已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
             <!-- 移动端显示 -->
@@ -46,14 +46,10 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item layui-hide layui-show-md-inline-block">
                 <a href="javascript:;">
-                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
-                    tester
+                    <%
+                        out.print(session.getAttribute("name"));
+                    %>
                 </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">Your Profile</a></dd>
-                    <dd><a href="">Settings</a></dd>
-                    <dd><a href="">Sign out</a></dd>
-                </dl>
             </li>
             <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
                 <a href="javascript:;">
@@ -70,22 +66,29 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">员工管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">员工列表</a></dd>
+                        <dd><a href="UserServlet?method=ToStaffList" target="contextPage">
+                            员工列表
+<%--                            <%--%>
+<%--                                String target = "/WEB-INF/StaffList.jsp";--%>
+<%--                                session.setAttribute("target",target);--%>
+<%--                            %>--%>
+                        </a></dd>
                         <dd><a href="javascript:;">增加员工</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">部门管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">部门列表</a></dd>
+                        <dd><a href="">部门列表</a></dd>
                         <dd><a href="javascript:;">新增部门</a></dd>
                     </dl>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="layui-body" style="background-image: url('${pageContext.request.contextPath}/static/assets/img/preview.jpg');background-size: 100%;opacity: 20%">
-        dsadasdasdas
+<%--    style="background-image: url('${pageContext.request.contextPath}/static/assets/img/preview.jpg');background-size: 100%;opacity: 20%"--%>
+    <div class="layui-body" >
+        <iframe name="contextPage" style="width: 100%; height: 100%;"></iframe>
     </div>
 
     <div class="layui-footer">
@@ -122,5 +125,6 @@
 
     });
 </script>
+
 </body>
 </html>
