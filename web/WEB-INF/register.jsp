@@ -45,7 +45,6 @@
         <span class="agreement-tip">点击「注册」按钮，即代表你同意<a href="javascript:;">《协议》</a></span>
     </form>
 </div>
-<script src="${pageContext.request.contextPath}/static/assets/libs/jquery-1.12.4/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/assets/libs/sweetalert2/sweetalert2.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/assets/libs/particles/particles.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/assets/libs/particles/js/app.js"></script>

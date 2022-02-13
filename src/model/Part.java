@@ -46,4 +46,14 @@ public class Part {
     public void setLeaderId(int leaderId) {
         this.leaderId = leaderId;
     }
+
+    @Override
+    public String toString() {
+        return "Part{" +
+                "id=" + id +
+                ", partName='" + partName + '\'' +
+                ", partLeader='" + partLeader + '\'' +
+                ", leaderId=" + leaderId +
+                '}';
+    }
 }
