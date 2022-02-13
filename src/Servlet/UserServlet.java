@@ -1,5 +1,7 @@
 package Servlet;
 
+import com.alibaba.fastjson.JSON;
+import model.Part;
 import model.User;
 import util.DBHelper;
 import util.MD5Util;
@@ -91,4 +93,13 @@ public class UserServlet extends BaseServlet{
 //        String target = (String) request.getSession().getAttribute("target");
 //        request.getRequestDispatcher(target).forward(request, response);
 //    }
+    public void selectById(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        //System.out.println(id);
+        String sql = "select * from user where id = ?";
+        List<User> list = DBHelper.queryAll(sql, User.class, id);
+        User part = list.get(0);
+
+        responseObject(JSON.toJSONString(part),response);
+    }
 }

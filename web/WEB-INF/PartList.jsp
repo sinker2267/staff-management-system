@@ -41,12 +41,6 @@
             <td class="layui-btn-group" style="width: 300px">
                 <a class="layui-btn layui-btn-primary layui-btn-sm" onclick="edit('PartServlet?method=selectById&id='+${part.id})"><i class="layui-icon">&#xe642;</i></a>
                 <a class="layui-btn layui-btn-primary layui-btn-sm" ><i class="layui-icon">&#xe640;</i></a>
-<%--                <button id = "edit" type="button" class="layui-btn layui-btn-primary layui-btn-sm">--%>
-<%--                    <i class="layui-icon">&#xe642;</i>--%>
-<%--                </button>--%>
-<%--                <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">--%>
-<%--                    <i class="layui-icon">&#xe640;</i>--%>
-<%--                </button>--%>
             </td>
         </tr>
     </c:forEach>
@@ -64,7 +58,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">部门主管</label>
             <div class="layui-input-block">
-                <input type="text" id="bname" name="bname" lay-verify="title" value="${requestScope.selectById.partLeader}" class="layui-input">
+                <input type="text" id="bname" name="bname" lay-verify="title"  class="layui-input">
             </div>
         </div>
     </form>

@@ -31,8 +31,6 @@ public class BaseServlet extends HttpServlet {
     }
 
     public void responseObject(Object obj,HttpServletResponse res) throws IOException {
-        System.out.println(obj);
-
         // 设置响应编码
         res.setCharacterEncoding("utf-8");
         PrintWriter out=null;
