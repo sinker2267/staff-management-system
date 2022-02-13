@@ -138,6 +138,10 @@ public class DBHelper {
 		}
 
 	}
+	//多条件不定项查询
+//	public static <T> List<T> selectAll(String sql, Class<T> cls, Object... params) {
+//
+//	}
 
 //	public static void main(String[] args) {
 //		String sql="SELECT * FROM staff";

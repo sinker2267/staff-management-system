@@ -1,6 +1,7 @@
 package Servlet;
 
 import com.alibaba.fastjson.JSON;
+import com.sun.xml.internal.ws.client.ClientSchemaValidationTube;
 import model.Part;
 import model.User;
 import util.DBHelper;
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class UserServlet extends BaseServlet{
+    private List<User> users;
     public void ToRegister(HttpServletRequest request, HttpServletResponse response){
         try {
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
@@ -82,24 +85,72 @@ public class UserServlet extends BaseServlet{
         request.getRequestDispatcher("/WEB-INF/StaffList.jsp").forward(request, response);
     }
     public void GetStaffData(HttpServletRequest request, HttpServletResponse response){
-        String sql = "select * from user";
-        List<User> list = DBHelper.queryAll(sql, User.class, null);
-//        for (User user : list) {
-//            System.out.println(user.getPart()+" "+user.getUserName());
-//        }
-        request.setAttribute("user",list);
+        if(this.users==null){
+            String sql = "select * from user";
+            List<User> list = DBHelper.queryAll(sql, User.class, null);
+            request.setAttribute("user",list);
+        }
+        else{
+            request.setAttribute("user",this.users);
+        }
+
     }
-//    public void ToPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String target = (String) request.getSession().getAttribute("target");
-//        request.getRequestDispatcher(target).forward(request, response);
-//    }
     public void selectById(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         //System.out.println(id);
         String sql = "select * from user where id = ?";
         List<User> list = DBHelper.queryAll(sql, User.class, id);
         User part = list.get(0);
-
         responseObject(JSON.toJSONString(part),response);
+    }
+    public void updateStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("userId"));
+        String name = request.getParameter("userName");
+        String moblie = request.getParameter("userMobile");
+        String part = request.getParameter("uaerPart");
+//        System.out.println(id+" "+name+" "+moblie+" "+part);
+        String sql = "update user set user_name=?,user_moblie=?,user_part=? where id=?";
+        int res = DBHelper.deal(sql,name,moblie,part,id);
+        ToStaffList(request,response);
+    }
+    public void deleteById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String sql = "delete from user where id = ?";
+        int res = DBHelper.deal(sql,id);
+        ToStaffList(request,response);
+    }
+    public void selectUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("inputName");
+        String moblie = request.getParameter("inputMoblie");
+        String part = request.getParameter("inputPart");
+        if(name==null && moblie == null && part==null) return;
+        String sql = "select * from user where ";
+        boolean flag = false;
+        List<String> list = new ArrayList<>();
+        if(name != null && name.length() > 0){
+            if(flag ==  true) sql+=" and ";
+            sql += "user_name = ?";
+            flag = true;
+            list.add(name);
+        }
+        if(moblie != null && moblie.length() > 0){
+            if(flag ==  true) sql+=" and ";
+            sql += "user_moblie = ?";
+            flag = true;
+            list.add(moblie);
+        }
+        if(part != null && part.length() > 0){
+            if(flag ==  true) sql+=" and ";
+            sql += "user_part = ?";
+            flag = true;
+            list.add(part);
+        }
+        this.users = DBHelper.queryAll(sql,User.class,list.toArray());
+        for (User re : this.users) {
+            System.out.println(re.getUserName());
+        }
+        responseObject(1,response);
+        ToStaffList(request,response);
+        //request.getRequestDispatcher("/WEB-INF/StaffList.jsp").forward(request, response);
     }
 }

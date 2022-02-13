@@ -71,14 +71,6 @@
 </script>
 <script>
     $(function(){
-        //为表单的必填文本框添加提示信息（选择form中的所有后代input元素）
-        // $("form :input.required").each(function () {
-        //     //通过jquery api：$("HTML字符串") 创建jquery对象
-        //     var $required = $("<strong class='high'>*</strong>");
-        //     //添加到this对象的父级对象下
-        //     $(this).parent().append($required);
-        // });
-        // var errorMsg = $(".error-msg").text();
         //为表单元素添加失去焦点事件
         $("form :input").blur(function(){
             var $parent = $(this).parent();
