@@ -10,9 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.User;
-
-
 
 public class DBHelper {
 	//数据库地址URL
@@ -138,17 +135,5 @@ public class DBHelper {
 		}
 
 	}
-	//多条件不定项查询
-//	public static <T> List<T> selectAll(String sql, Class<T> cls, Object... params) {
-//
-//	}
-
-//	public static void main(String[] args) {
-//		String sql="SELECT * FROM staff";
-//		List<Staff> list=queryAll(sql, Staff.class,null);
-//		for (Staff staff : list) {
-//			System.out.println(staff.getStaName());
-//		}
-//	}
 
 }

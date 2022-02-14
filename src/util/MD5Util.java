@@ -24,8 +24,6 @@ public class MD5Util {
 			byte[] result = digest.digest(verifyStr.getBytes("utf-8"));
 			StringBuilder encStr = new StringBuilder();
 			for (byte b : result) {
-				//按位与操作，即b的二进制和0xFF的二进制按位比较，只有都为1时才返回1
-				//0xff=1111 1111
 				int number = b & 0xff;
 				String hex = Integer.toHexString(number);
 				if (hex.length() == 1) {

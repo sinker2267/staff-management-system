@@ -30,18 +30,6 @@
             <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
                 <i class="layui-icon layui-icon-spread-left"></i>
             </li>
-
-<%--            <li class="layui-nav-item layui-hide-xs"><a href="">nav 1</a></li>--%>
-<%--            <li class="layui-nav-item layui-hide-xs"><a href="">nav 2</a></li>--%>
-<%--            <li class="layui-nav-item layui-hide-xs"><a href="">nav 3</a></li>--%>
-<%--            <li class="layui-nav-item">--%>
-<%--                <a href="javascript:;">nav groups</a>--%>
-<%--                <dl class="layui-nav-child">--%>
-<%--                    <dd><a href="">menu 11</a></dd>--%>
-<%--                    <dd><a href="">menu 22</a></dd>--%>
-<%--                    <dd><a href="">menu 33</a></dd>--%>
-<%--                </dl>--%>
-<%--            </li>--%>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item layui-hide layui-show-md-inline-block">
@@ -58,7 +46,6 @@
             </li>
         </ul>
     </div>
-
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -68,10 +55,6 @@
                     <dl class="layui-nav-child">
                         <dd><a href="UserServlet?method=ToStaffList" target="contextPage">
                             员工列表
-<%--                            <%--%>
-<%--                                String target = "/WEB-INF/StaffList.jsp";--%>
-<%--                                session.setAttribute("target",target);--%>
-<%--                            %>--%>
                         </a></dd>
                         <dd><a href="UserServlet?method=ToaddStaff" target="contextPage">增加员工</a></dd>
                     </dl>
@@ -86,7 +69,6 @@
             </ul>
         </div>
     </div>
-<%--    style="background-image: url('${pageContext.request.contextPath}/static/assets/img/preview.jpg');background-size: 100%;opacity: 20%"--%>
     <div class="layui-body" >
         <iframe name="contextPage" style="width: 100%; height: 100%;"></iframe>
     </div>

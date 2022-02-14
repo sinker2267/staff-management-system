@@ -1,8 +1,6 @@
 package Servlet;
 
 import com.alibaba.fastjson.JSON;
-import com.sun.xml.internal.ws.client.ClientSchemaValidationTube;
-import model.Part;
 import model.User;
 import util.DBHelper;
 import util.MD5Util;
@@ -81,7 +79,6 @@ public class UserServlet extends BaseServlet{
         request.getRequestDispatcher("/WEB-INF/main.jsp").forward(request, response);
     }
     public void ToaddStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //System.out.println("yes");
         request.getRequestDispatcher("/WEB-INF/addStaff.jsp").forward(request, response);
     }
     public void ToStaffList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -102,7 +99,6 @@ public class UserServlet extends BaseServlet{
     }
     public void selectById(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        //System.out.println(id);
         String sql = "select * from user where id = ?";
         List<User> list = DBHelper.queryAll(sql, User.class, id);
         User part = list.get(0);
@@ -113,7 +109,6 @@ public class UserServlet extends BaseServlet{
         String name = request.getParameter("userName");
         String moblie = request.getParameter("userMobile");
         String part = request.getParameter("uaerPart");
-//        System.out.println(id+" "+name+" "+moblie+" "+part);
         String sql = "update user set user_name=?,user_moblie=?,user_part=? where id=?";
         int res = DBHelper.deal(sql,name,moblie,part,id);
         ToStaffList(request,response);
@@ -151,12 +146,8 @@ public class UserServlet extends BaseServlet{
             list.add(part);
         }
         this.users = DBHelper.queryAll(sql,User.class,list.toArray());
-//        for (User re : this.users) {
-//            System.out.println(re.getUserName());
-//        }
         responseObject(1,response);
         ToStaffList(request,response);
-        //request.getRequestDispatcher("/WEB-INF/StaffList.jsp").forward(request, response);
     }
     public void addStaff(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String psd = MD5Util.encode(request.getParameter("inputPsd"));

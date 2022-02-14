@@ -24,7 +24,7 @@
     </div>
     <nav class="switch_nav">
         <a href="javascript:;" id="switch_signup" class="switch_btn on">注册</a>
-        <a id="switch_login" class="switch_btn">登陆</a>
+        <a href="UserServlet?method=ToLogin" class="switch_btn">登陆</a>
         <div class="switch_bottom" id="switch_bottom"></div>
     </nav>
     <form onsubmit="return false">
@@ -39,7 +39,6 @@
                 <input type="password" placeholder="密码(不少于6位)" class="psd required" id="psd" name="psd"/>
             </li>
         </ul>
-<%--        <button type="submit" class="submit_btn" id="btnSubmit" onclick="sendSubmit()">注册</button>--%>
         <button type="submit" class="submit_btn" id="btnSubmit" onclick="register_btn()">注册</button>
 
         <span class="agreement-tip">点击「注册」按钮，即代表你同意<a href="javascript:;">《协议》</a></span>
@@ -48,29 +47,12 @@
 <script src="${pageContext.request.contextPath}/static/assets/libs/sweetalert2/sweetalert2.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/assets/libs/particles/particles.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/assets/libs/particles/js/app.js"></script>
-<!-- <script src="${pageContext.request.contextPath}/static/assets/libs/particles/js/lib/stats.js"></script> -->
+<script src="${pageContext.request.contextPath}/static/assets/libs/jquery-1.12.4/jquery.min.js"></script>
 <script>
     var form = document.getElementsByTagName('form')[0];
     form.addEventListener('submit',function(e){
         e.preventDefault();
     });
-    var count_particles, stats, update;
-    stats = new Stats;
-    stats.setMode(0);
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
-    document.body.appendChild(stats.domElement);
-    count_particles = document.querySelector('.js-count-particles');
-    update = function() {
-        stats.begin();
-        stats.end();
-        if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-            count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-        }
-        requestAnimationFrame(update);
-    };
-    requestAnimationFrame(update);
 </script>
 
 <script>
@@ -150,10 +132,6 @@
             success:function (str){
                 if(str == 1){
                     alert("注册成功");
-<%--                    <%--%>
-<%--                      String target = "/WEB-INF/main.jsp";--%>
-<%--                      session.setAttribute("target",target);--%>
-<%--                      %>--%>
                     window.location.href = "UserServlet?method=ToMain";
                 }
                 else{
@@ -166,11 +144,6 @@
         })
     }
 
-</script>
-<script>
-    $("#switch_login").click(function (){
-        window.location.href = "UserServlet?method=ToLogin";
-    })
 </script>
 </body>
 </html>

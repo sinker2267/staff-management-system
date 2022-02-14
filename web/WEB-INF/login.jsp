@@ -45,30 +45,7 @@
 <script src="${pageContext.request.contextPath}/static/assets/libs/jquery-1.12.4/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/assets/libs/particles/particles.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/assets/libs/particles/js/app.js"></script>
-<!-- <script src="${pageContext.request.contextPath}/static/assets/libs/particles/js/lib/stats.js"></script> -->
-<script>
-    var form = document.getElementsByTagName('form')[0];
-    form.addEventListener('submit',function(e){
-        e.preventDefault();
-    });
-    var count_particles, stats, update;
-    stats = new Stats;
-    stats.setMode(0);
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
-    document.body.appendChild(stats.domElement);
-    count_particles = document.querySelector('.js-count-particles');
-    update = function() {
-        stats.begin();
-        stats.end();
-        if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-            count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-        }
-        requestAnimationFrame(update);
-    };
-    requestAnimationFrame(update);
-</script>
+
 <script>
     $(function(){
         //为表单元素添加失去焦点事件
@@ -122,11 +99,6 @@
             data: {"moblie":mobile,"psd":psd},
             success:function (str){
                 if(str == 1){
-                   //alert("登录成功");
-<%--                    <%--%>
-<%--                      String target = "/WEB-INF/main.jsp";--%>
-<%--                      session.setAttribute("target",target);--%>
-<%--                      %>--%>
                     window.location.href = "UserServlet?method=ToMain";
                 }
                 else{

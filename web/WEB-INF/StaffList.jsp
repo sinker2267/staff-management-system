@@ -97,8 +97,6 @@
         e.preventDefault();
     });
     function edit(Path){
-        <%--        ${requestScope.put("id",PartId)}--%>
-        <%--        console.log('${requestScope.id}')--%>
         $.ajax({
             url: Path,
             type: "POST",
