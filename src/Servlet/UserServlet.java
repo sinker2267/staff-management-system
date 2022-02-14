@@ -80,9 +80,14 @@ public class UserServlet extends BaseServlet{
     public void ToMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/main.jsp").forward(request, response);
     }
+    public void ToaddStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //System.out.println("yes");
+        request.getRequestDispatcher("/WEB-INF/addStaff.jsp").forward(request, response);
+    }
     public void ToStaffList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         GetStaffData(request,response);
         request.getRequestDispatcher("/WEB-INF/StaffList.jsp").forward(request, response);
+        this.users = null;
     }
     public void GetStaffData(HttpServletRequest request, HttpServletResponse response){
         if(this.users==null){
@@ -146,11 +151,20 @@ public class UserServlet extends BaseServlet{
             list.add(part);
         }
         this.users = DBHelper.queryAll(sql,User.class,list.toArray());
-        for (User re : this.users) {
-            System.out.println(re.getUserName());
-        }
+//        for (User re : this.users) {
+//            System.out.println(re.getUserName());
+//        }
         responseObject(1,response);
         ToStaffList(request,response);
         //request.getRequestDispatcher("/WEB-INF/StaffList.jsp").forward(request, response);
+    }
+    public void addStaff(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String psd = MD5Util.encode(request.getParameter("inputPsd"));
+        String name = request.getParameter("inputName");
+        String moblie = request.getParameter("inputMoblie");
+        String part = request.getParameter("inputPart");
+        String sql = "insert into user (user_name,user_moblie,user_psd,user_part)values(?,?,?,?)";
+        int res = DBHelper.deal(sql,name,moblie,psd,part);
+        responseObject(1,response);
     }
 }

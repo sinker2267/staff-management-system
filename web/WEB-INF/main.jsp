@@ -73,14 +73,14 @@
 <%--                                session.setAttribute("target",target);--%>
 <%--                            %>--%>
                         </a></dd>
-                        <dd><a href="javascript:;">增加员工</a></dd>
+                        <dd><a href="UserServlet?method=ToaddStaff" target="contextPage">增加员工</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">部门管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="PartServlet?method=ToPartList" target="contextPage">部门列表</a></dd>
-                        <dd><a href="javascript:;">新增部门</a></dd>
+                        <dd><a >新增部门</a></dd>
                     </dl>
                 </li>
             </ul>
